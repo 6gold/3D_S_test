@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>3D_S demo</title>
+        <meta charset="utf-8">
+        <!--import stylesheet-->
+        <link rel="stylesheet" href="stylesheets/style_3D_S.css" type="text/css"/>
+    </head>
+
+    <body>
+
+        <div id="glFullscreen">
+            <!--canvas that hold all elements-->
+            <canvas id="canvas_3D_S"></canvas>
+        </div>
+
+        <div id="info">
+            left button:rotate | right button:move | mouse wheel:scale
+            <br>center_X:<span id="center_X_3D_S"></span> |
+                center_Y:<sapn id="center_Y_3D_S"></sapn> |
+                center_Z:<span id="center_Z_3D_S"></span>
+            <br>rotation_X:<span id="rotation_X_3D_S"></span> |
+                rotation_Y:<span id="rotation_Y_3D_S"></span> |
+                rotation_Z:<span id="rotation_Z_3D_S"></span>
+        </div>
+
+        <!--引入必要的js文件-->
+        <script src="javascripts/Detector.js"></script>
+        <script src="javascripts/jquery-3.3.1.min.js"></script>
+        <script src="javascripts/dat.gui.min.js"></script>
+        <script src="javascripts/stats.min.js"></script>
+        <script src="javascripts/three.js"></script>
+        <script src="javascripts/controls/TrackballControls.js"></script>
+        <script src="javascripts/loaders/STLLoader.js"></script>
+
+        <script src="javascripts/3D_S.js"></script>
+
+    </body>
+</html>
