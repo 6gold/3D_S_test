@@ -44,7 +44,7 @@ var renderer_3D_S = new THREE.WebGLRenderer({
 });
 renderer_3D_S.setClearColor(0xeeeeee);
 renderer_3D_S.setSize( window.innerWidth, window.innerHeight );
-renderer_3D_S.setPixelRatio( window.devicePixelRatio );
+// renderer_3D_S.setPixelRatio( window.devicePixelRatio );
 renderer_3D_S.shadowMapEnabled = true;
 
 // set controller

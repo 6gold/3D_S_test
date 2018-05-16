@@ -104,30 +104,30 @@ function createTriangle() {
 
     // ShaderMaterial测试
     var attributes = {
-        displacement: {
+        color_r: {
             type: 'f', // a float
             value: [] // an empty array
         },
-        theta: {
+        color_g: {
             type: 'f', // a float
             value: [] // an empty array
         },
-        phi:{
+        color_b:{
             type: 'f', // a float
             value: [] // an empty array
         }
     };
     // now populate the array of attributes
     var verts = testTriangle_geom.vertices;
-    var values = attributes.displacement.value;
-    var thetas = attributes.theta.value;
-    var phis = attributes.phi.value;
+    var color_r = attributes.color_r.value;
+    var color_g = attributes.color_g.value;
+    var color_b = attributes.color_b.value;
     for (var v = 0; v < verts.length; v++) {
-        values.push(Math.random());
-        thetas.push(Math.random());
-        phis.push(Math.random());
+        color_r.push(Math.random());
+        color_g.push(Math.random());
+        color_b.push(Math.random());
     }
-    console.log(values);
+    console.log(color_r);
 
     var shaderMaterial_test;
     // // load shader

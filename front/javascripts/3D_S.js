@@ -1,10 +1,16 @@
 'use strict';
 
-var object3D_S; // model imported
+// model variables
+var object3D_S;
 var boundingBox_3D_S;
+// sphere variables
 var sphere_3D_S; // sphere around the model
 var sphere_pos_3D_S;
 var sphere_radius_3D_S;
+var sphere_wSegs_3D_S;
+var sphere_hSegs_3D_S;
+var sphgeom_3D_S;
+var sphmat_3D_S;
 // webGL variables
 var canvas_3D_S;
 var scene_3D_S;
@@ -17,6 +23,7 @@ var renderer_3D_S;
 var controller_3D_S;
 var stlloader_3D_S;
 
+
 // -----------------------------call functions---------------------------------------
 initWebGL_S();
 
@@ -24,7 +31,8 @@ initWebGL_S();
 stlloader_3D_S=new THREE.STLLoader();
 var callbackOnLoadSTL_3D_S = function (modelgeom) {
     drawModel_S(modelgeom);
-    drawBoundingBox_S();
+    drawSphere();
+    // drawBoundingBox_S();
 };
 stlloader_3D_S.load('http://localhost:3000/../models/test.stl',callbackOnLoadSTL_3D_S);
 
@@ -72,7 +80,7 @@ function initWebGL_S() {
     });
     renderer_3D_S.setClearColor(0xeeeeee);
     renderer_3D_S.setSize( window.innerWidth, window.innerHeight );
-    renderer_3D_S.setPixelRatio( window.devicePixelRatio );
+    // renderer_3D_S.setPixelRatio( window.devicePixelRatio );
 
     // set controller
     controller_3D_S = new THREE.TrackballControls(camera_3D_S, renderer_3D_S.domElement);
@@ -128,6 +136,183 @@ function drawModel_S(modelgeom) {
     // add mesh to the scene
     scene_3D_S.add(object3D_S);
 }
+
+/* method: drawModel
+   args: none
+   function:  */
+function drawSphere() {
+    // create radius and position
+    var sqrt_3D_S = Math.sqrt(
+        (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) * (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) +
+        (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) * (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) +
+        (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z) * (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z)
+    );
+    sphere_radius_3D_S = Math.ceil(sqrt_3D_S) / 2;
+    sphere_pos_3D_S = new THREE.Vector3(
+        // 包围盒中心点
+        (boundingBox_3D_S.max.x + boundingBox_3D_S.min.x) / 2,
+        (boundingBox_3D_S.max.y + boundingBox_3D_S.min.y) / 2,
+        (boundingBox_3D_S.max.z + boundingBox_3D_S.min.z) / 2
+    );
+
+    // create sphere
+    sphgeom_3D_S = new THREE.Geometry(); // define a blank geometry
+
+    sphere_wSegs_3D_S = 360; // test value 纬带数(纬线数+1)
+    sphere_hSegs_3D_S = 360; // test value 经带数
+
+    // 重新着色
+    // ShaderMaterial测试
+    var attributes = {
+        color_r: {
+            type: 'f', // a float
+            value: [] // an empty array
+        },
+        color_g: {
+            type: 'f', // a float
+            value: [] // an empty array
+        },
+        color_b:{
+            type: 'f', // a float
+            value: [] // an empty array
+        }
+    };
+    // now populate the array of attributes
+    var color_r = attributes.color_r.value;
+    var color_g = attributes.color_g.value;
+    var color_b = attributes.color_b.value;
+
+    // 【生成所有顶点位置】 latNumber:纬线计数器
+    for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
+        var theta = latNumber * Math.PI / sphere_wSegs_3D_S;
+        var sinTheta = Math.sin(theta);
+        var cosTheta = Math.cos(theta);
+        for (var longNumber=0; longNumber<=sphere_hSegs_3D_S; longNumber++) {
+            var phi = longNumber * 2 * Math.PI / sphere_hSegs_3D_S;
+            var sinPhi = Math.sin(phi);
+            var cosPhi = Math.cos(phi);
+            // 球坐标系映射到xyz
+            var x = sphere_radius_3D_S * sinTheta * cosPhi;
+            var y = sphere_radius_3D_S * sinTheta * sinPhi;
+            var z = sphere_radius_3D_S * cosTheta;
+            var p = new THREE.Vector3(x, y, z);
+            sphgeom_3D_S.vertices.push(p);
+            // 重新着色(伪彩色编码)
+            var gray_color = gray_scale(theta, phi);// 产生灰度值
+            // var gray_color = Math.random() * 256;// 随机产生灰度值
+            var red_color = trans_R(gray_color);
+            var green_color = trans_G(gray_color);
+            var blue_color = trans_B(gray_color);
+            color_r.push(red_color);
+            color_g.push(green_color);
+            color_b.push(blue_color);
+            console.log(new THREE.Vector3(red_color,green_color,blue_color));
+        }
+    }
+    // 为了把这些顶点缝合到一起，需要【建立三角面片索引列表】
+    var indexData = [];
+    for (var latNumber = 0; latNumber < sphere_wSegs_3D_S; latNumber++) {
+        for (var longNumber = 0; longNumber < sphere_hSegs_3D_S; longNumber++) {
+            var first = (latNumber * (sphere_hSegs_3D_S + 1)) + longNumber;
+            var second = first + sphere_hSegs_3D_S + 1;
+            indexData.push(first);
+            indexData.push(second);
+            indexData.push(first + 1);
+            indexData.push(second);
+            indexData.push(second + 1);
+            indexData.push(first + 1);
+        }
+    }
+    // create faces
+    for (var vertexCounter = 0; vertexCounter<indexData.length; vertexCounter+=3) {
+        var face = new THREE.Face3(
+            indexData[vertexCounter],
+            indexData[vertexCounter+1],
+            indexData[vertexCounter+2]
+        );
+        // 为面片随机生成颜色
+        // var color1 = new THREE.Color(0xFF0000);//顶点1颜色——红色
+        // var color2 = new THREE.Color(0x00FF00);//顶点2颜色——绿色
+        // var color3 = new THREE.Color(0x0000FF);//顶点3颜色——蓝色
+        // face.vertexColors.push(color1, color2,color3);//定义三角面三个顶点的颜色
+        sphgeom_3D_S.faces.push(face);
+    }
+
+    // // random color material
+    // var sphmat=new THREE.MeshLambertMaterial({
+    //     vertexColors: THREE.VertexColors,//以顶点颜色为准
+    //     side: THREE.DoubleSide,//两面可见
+    //     transparent: true,
+    //     opacity: 1.0
+    // });//材质对象
+
+    // // load shader
+    $.get('http://localhost:3000/../shaders/my.vs', function(vShader){
+        $.get('http://localhost:3000/../shaders/my.fs', function(fShader){
+            // console.log(vShader); // test success
+            // console.log(fShader); // test success
+            sphmat_3D_S = new THREE.ShaderMaterial({
+                vertexShader: vShader,
+                fragmentShader: fShader,
+                attributes: attributes
+            });
+            // create sphere and add it to scene[这两步必须放到材质生成之后，jQuery中]
+            sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
+            sphere_3D_S.position.set(sphere_pos_3D_S.x, sphere_pos_3D_S.y, sphere_pos_3D_S.z);
+            // sphere_3D_S.scale.set( 22, 22, 22);
+            scene_3D_S.add(sphere_3D_S); //模型添加到场景中
+        });
+    });
+
+
+    // create sphere and add it to scene
+    // sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
+    // sphere_3D_S.position.set(0, 0, 0);
+    // sphere_3D_S.scale.set( 22, 22, 22);
+    // scene_3D_S.add(sphere_3D_S); //网格模型添加到场景中
+}
+
+function gray_scale(theta, phi) {
+    // var gray_value = Math.ceil(Math.sin(theta+phi) * 256);
+    var gray_value = Math.ceil(Math.sin(theta) * 256);
+    return gray_value;
+}
+function trans_R(gray_color) {
+    var color_red;
+    if (gray_color >= 0.0 && gray_color < 128.0) {
+        color_red = 0.0;
+    }else if (gray_color >= 128.0 && gray_color < 192.0) {
+        color_red = (gray_color - 128.0) / 64.0;
+    }else if (gray_color >= 192.0 && gray_color <= 256.0) {
+        color_red = 1.0;
+    }
+    return color_red;
+}
+function trans_G(gray_color) {
+    var color_green;
+    if (gray_color >= 0.0 && gray_color < 64.0) {
+        color_green = 0.0;
+    }else if (gray_color >= 64.0 && gray_color < 128.0) {
+        color_green = (gray_color - 64.0) / 64.0;
+    }else if (gray_color >= 128.0 && gray_color < 192.0) {
+        color_green = 1.0;
+    } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+        color_green = (256.0 - gray_color) / 64.0;
+    }
+    return color_green;
+}
+function trans_B(gray_color) {
+    var color_blue;
+    if (gray_color >= 0.0 && gray_color < 64.0) {
+        color_blue = gray_color / 64.0;
+    }else if (gray_color >= 64.0 && gray_color < 128.0) {
+        color_blue = (128.0 - gray_color) / 64.0;
+    }else if (gray_color >= 128.0 && gray_color <= 256.0) {
+        color_blue = 0.0;
+    }
+    return color_blue;
+}
+
 
 /* method: drawBoundingBox
    args: none
@@ -215,23 +400,13 @@ function drawBoundingBox_S() {
     scene_3D_S.add(sphere_3D_S);
 }
 
-
-
-
-
-
-
-
-
-
-
 // create rcs data
 // function RCS_s(t, f,r_d) {
 //     this.t = t;
 //     this.f = f;
 //     this.r_d = r_d;
 // }
-function readRCS() {
+// function readRCS() {
     // read rcs data
 // var rcs_s=[];
 // var rcsLength_s;
@@ -247,4 +422,32 @@ function readRCS() {
 //     console.log(rcs_s);
 //     console.log(rcsLength_s);
 // });
-}
+// }
+
+
+// set OBJ loader
+// var objLoader_3D_S = new THREE.OBJLoader2();
+// var callbackOnLoad_3D_S = function (event) {
+//     console.log(event.detail);
+//     object3D_S = event.detail.loaderRootNode;
+//     // scale the model
+//     object3D_S.scale.set(5,5,5);
+//     // calculate the center point
+//     center_3D_S = object3D_S.position;
+//     console.log(center_3D_S);
+//     // calculate the bounding box
+//     boundingBox_3D_S = new THREE.Box3().setFromObject(object3D_S);
+//     console.log(boundingBox_3D_S);
+//     // calculate the Euler rotation
+//     rotation_3D_S = object3D_S.rotation;
+//     console.log(rotation_3D_S);
+//     // calculate number of vertexes and faces
+//     // console.log(objLoader_3D_S);
+//     console.log(controller_3D_S);
+//
+//     // add model to scene
+//     scene_3D_S.add(object3D_S);
+//
+//     console.log(camera_3D_S);
+// };
+// objLoader_3D_S.load('assets/models/obj/Lockheed C130 Hercules.obj', callbackOnLoad_3D_S, null, null, null, false);
