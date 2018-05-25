@@ -70,7 +70,9 @@ function render_3D_S() {
    args: none
    function: draw a sphere */
 function createSphere() {
-    var geometry = new THREE.Geometry(); // define a blank geometry
+    var geometry = new THREE.Geometry({
+        colorsNeedUpdate : true
+    }); // define a blank geometry
     var material = new THREE.MeshBasicMaterial(
         {
             transparency: true,
@@ -100,12 +102,15 @@ function createSphere() {
             var z = sphere_radius_3D_S * cosTheta;
             var p = new THREE.Vector3(x, y, z);
             geometry.vertices.push(p);
-            geometry.colors.push( Math.sin(theta*theta+phi*phi) );
+
+            // geometry.colors.push( Math.sin(theta+phi) );
+            // geometry.colors.push("rgb(255, 0, 0)");
             // 为每个顶点产生随机颜色
-            // var random_r=Math.floor(Math.random()*256);
-            // var random_g=Math.floor(Math.random()*256);
-            // var random_b=Math.floor(Math.random()*256);
+            // var random_r=Math.floor(Math.random());
+            // var random_g=Math.floor(Math.random());
+            // var random_b=Math.floor(Math.random());
             // var randomColor = new THREE.Color(random_r, random_g, random_b);
+            // var randomColor = new THREE.Color(0xFF0000);
             // console.log(randomColor);
             // geometry.colors.push(randomColor);
         }
@@ -122,20 +127,50 @@ function createSphere() {
             indexData.push(second);
             indexData.push(second + 1);
             indexData.push(first + 1);
+            // 测试用：调整了顶点顺序
+            // indexData.push(first + 1);
+            // indexData.push(second);
+            // indexData.push(second + 1);
+
         }
     }
     // create faces
     for (var vertexCounter = 0; vertexCounter<indexData.length; vertexCounter+=3) {
+        // var face = new THREE.Face3(
+        //     indexData[vertexCounter],
+        //     indexData[vertexCounter+1],
+        //     indexData[vertexCounter+2]
+        // );
+        var index1 = indexData[vertexCounter];
+        var index2 = indexData[vertexCounter+1];
+        var index3 = indexData[vertexCounter+2];
         var face = new THREE.Face3(
-            indexData[vertexCounter],
-            indexData[vertexCounter+1],
-            indexData[vertexCounter+2]
+            index1,
+            index2,
+            index3
         );
-        // 为面片随机生成颜色
-        var color1 = new THREE.Color(0xFF0000);//顶点1颜色——红色
-        var color2 = new THREE.Color(0x00FF00);//顶点2颜色——绿色
-        var color3 = new THREE.Color(0x0000FF);//顶点3颜色——蓝色
-        face.vertexColors.push(color1, color2,color3);//定义三角面三个顶点的颜色
+
+        //着色方案1：仅用三种颜色测试
+        // var color1 = new THREE.Color(0xFF0000);//顶点1颜色——红色
+        // var color2 = new THREE.Color(0x00FF00);//顶点2颜色——绿色
+        // var color3 = new THREE.Color(0x0000FF);//顶点3颜色——蓝色
+
+        // 着色方案2：灰度→彩色映射
+        // 测试
+
+        // 着色方案3：随机颜色
+        // var color1 = new THREE.Color(0xFFFFFF * Math.random());//顶点1颜色——红色
+        // var color2 = new THREE.Color(0xFFFFFF * Math.random());//顶点2颜色——绿色
+        // var color3 = new THREE.Color(0xFFFFFF * Math.random());//顶点3颜色——蓝色
+
+        // 着色方案4：随顶点索引数随机变化
+        var color1 = findColor(index1,geometry.vertices.length);//顶点1颜色——红色
+        var color2 = findColor(index2,geometry.vertices.length);//顶点2颜色——绿色
+        var color3 = findColor(index3,geometry.vertices.length);//顶点3颜色——蓝色
+
+
+
+        face.vertexColors.push(color1, color2, color3);//定义三角面三个顶点的颜色
         geometry.faces.push(face);
     }
 
@@ -157,7 +192,14 @@ function createSphere() {
     // });
 
     // random color material
-    var random_material=new THREE.MeshLambertMaterial({
+    // var random_material=new THREE.MeshLambertMaterial({
+    //     vertexColors: THREE.VertexColors,//以顶点颜色为准
+    //     //vertexColors: geometry.colors,//以顶点颜色为准
+    //     side: THREE.DoubleSide,//两面可见
+    //     opacity: 1.0
+    // });//材质对象
+
+    var random_material=new THREE.MeshBasicMaterial({
         vertexColors: THREE.VertexColors,//以顶点颜色为准
         //vertexColors: geometry.colors,//以顶点颜色为准
         side: THREE.DoubleSide,//两面可见
@@ -195,4 +237,10 @@ function createSphere() {
     // var testTriangle = new THREE.Mesh(testTriangle_geom,random_material);
     // testTriangle.scale.set(20,20,20);
     // scene_3D_S.add(testTriangle);
+}
+
+// 测试用：根据顶点索引是否能整除3产生固定颜色
+function findColor(index,total) {
+    var ratio = 1.0 * index / total;
+    return new THREE.Color(0xFFFFFF * ratio);
 }

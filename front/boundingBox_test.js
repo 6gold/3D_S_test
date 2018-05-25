@@ -85,7 +85,7 @@ function initWebGL_S() {
    args: none
    function: render */
 function render_3D_S() {
-    requestAnimationFrame(render_3D_S);
+        requestAnimationFrame(render_3D_S);
     if (!renderer_3D_S.autoClear) renderer_3D_S.clear();
 
     // update values
@@ -197,7 +197,7 @@ function drawBoundingBox_S() {
     );
     sphere_radius_3D_S = Math.ceil(sqrt_3D_S) / 2;
     sphere_pos_3D_S = new THREE.Vector3(v8.x, v8.y, v8.z);
-    var sphgeom_3D_S = new THREE.SphereGeometry(sphere_radius_3D_S, 60, 60);
+    var sphgeom_3D_S = new THREE.SphereGeometry(sphere_radius_3D_S, 30, 8);
     var sphmat_3D_S = new THREE.MeshBasicMaterial(
         {
             transparency: true,

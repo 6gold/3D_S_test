@@ -98,12 +98,12 @@ function render_3D_S() {
 
     // update values
     // console.log(camera_3D_S.rotation.x);
-    document.getElementById("center_X_3D_S").innerHTML = Math.ceil(camera_3D_S.position.x).toString();
-    document.getElementById("center_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.position.y).toString();
-    document.getElementById("center_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.position.z).toString();
-    document.getElementById("rotation_X_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.x).toString();
-    document.getElementById("rotation_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.y).toString();
-    document.getElementById("rotation_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.z).toString();
+    // document.getElementById("center_X_3D_S").innerHTML = Math.ceil(camera_3D_S.position.x).toString();
+    // document.getElementById("center_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.position.y).toString();
+    // document.getElementById("center_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.position.z).toString();
+    // document.getElementById("rotation_X_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.x).toString();
+    // document.getElementById("rotation_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.y).toString();
+    // document.getElementById("rotation_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.z).toString();
 
     controller_3D_S.update();
     renderer_3D_S.render(scene_3D_S,camera_3D_S);
@@ -158,8 +158,8 @@ function drawSphere() {
     // create sphere
     sphgeom_3D_S = new THREE.Geometry(); // define a blank geometry
 
-    sphere_wSegs_3D_S = 360; // test value 纬带数(纬线数+1)
-    sphere_hSegs_3D_S = 360; // test value 经带数
+    sphere_wSegs_3D_S = 60; // test value 纬带数(纬线数+1)
+    sphere_hSegs_3D_S = 60; // test value 经带数
 
     // 重新着色
     // ShaderMaterial测试
@@ -183,6 +183,7 @@ function drawSphere() {
     var color_b = attributes.color_b.value;
 
     // 【生成所有顶点位置】 latNumber:纬线计数器
+    var totalVertex = (sphere_wSegs_3D_S+2)*sphere_hSegs_3D_S;
     for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
         var theta = latNumber * Math.PI / sphere_wSegs_3D_S;
         var sinTheta = Math.sin(theta);
@@ -198,11 +199,40 @@ function drawSphere() {
             var p = new THREE.Vector3(x, y, z);
             sphgeom_3D_S.vertices.push(p);
             // 重新着色(伪彩色编码)
-            var gray_color = gray_scale(theta, phi);// 产生灰度值
+
+            //着色方案1：仅用三种颜色测试
+            // if ( sphgeom_3D_S.vertices.length%3 == 0 ) {
+            //     var red_color = 255.0 / 256.0;
+            //     var green_color = 102.0 / 256.0;
+            //     var blue_color = 102.0 / 256.0;
+            // } else if ( sphgeom_3D_S.vertices.length%3 == 1 ) {
+            //     var red_color = 255.0 / 256.0;
+            //     var green_color = 255.0 / 256.0;
+            //     var blue_color = 102.0 / 256.0;
+            // } else if ( sphgeom_3D_S.vertices.length%3 == 2 ) {
+            //     var red_color = 153.0 / 256.0;
+            //     var green_color = 204.0 / 256.0;
+            //     var blue_color = 102.0 / 256.0;
+            // }
+
+            // 着色方案2：灰度→彩色映射
+            // var gray_color = gray_scale(theta, phi);// 产生连续变化的灰度值1
+            var gray_color = 256.0 * sphgeom_3D_S.vertices.length / totalVertex;// 产生连续变化的灰度值2
             // var gray_color = Math.random() * 256;// 随机产生灰度值
             var red_color = trans_R(gray_color);
             var green_color = trans_G(gray_color);
             var blue_color = trans_B(gray_color);
+
+            // 着色方案3：随机颜色
+            // var red_color = Math.random();
+            // var green_color = Math.random();
+            // var blue_color = Math.random();
+
+            // 着色方案4：随顶点索引数随机变化
+            // var red_color = findColor(sphgeom_3D_S.vertices.length,totalVertex).r;
+            // var green_color = findColor(sphgeom_3D_S.vertices.length,totalVertex).g;
+            // var blue_color = findColor(sphgeom_3D_S.vertices.length,totalVertex).b;
+
             color_r.push(red_color);
             color_g.push(green_color);
             color_b.push(blue_color);
@@ -254,7 +284,8 @@ function drawSphere() {
             sphmat_3D_S = new THREE.ShaderMaterial({
                 vertexShader: vShader,
                 fragmentShader: fShader,
-                attributes: attributes
+                attributes: attributes,
+                transparent: true
             });
             // create sphere and add it to scene[这两步必须放到材质生成之后，jQuery中]
             sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
@@ -312,7 +343,6 @@ function trans_B(gray_color) {
     }
     return color_blue;
 }
-
 
 /* method: drawBoundingBox
    args: none
@@ -398,6 +428,14 @@ function drawBoundingBox_S() {
     sphere_3D_S.rotation.set( - Math.PI / 2, 0, 0 );
     // add sphere to the scene
     scene_3D_S.add(sphere_3D_S);
+}
+
+/* method: findColor
+   args: none
+   function:  */
+function findColor(index,total) {
+    var ratio = 1.0 * index / total;
+    return new THREE.Color(0xFFFFFF * ratio);
 }
 
 // create rcs data
