@@ -183,7 +183,7 @@ function drawSphere() {
     var color_b = attributes.color_b.value;
 
     // 【生成所有顶点位置】 latNumber:纬线计数器
-    var totalVertex = (sphere_wSegs_3D_S+2)*sphere_hSegs_3D_S;
+    var totalVertex = (sphere_wSegs_3D_S+1)*(sphere_hSegs_3D_S+1);
     for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
         var theta = latNumber * Math.PI / sphere_wSegs_3D_S;
         var sinTheta = Math.sin(theta);
@@ -201,27 +201,27 @@ function drawSphere() {
             // 重新着色(伪彩色编码)
 
             //着色方案1：仅用三种颜色测试
-            // if ( sphgeom_3D_S.vertices.length%3 == 0 ) {
-            //     var red_color = 255.0 / 256.0;
-            //     var green_color = 102.0 / 256.0;
-            //     var blue_color = 102.0 / 256.0;
-            // } else if ( sphgeom_3D_S.vertices.length%3 == 1 ) {
-            //     var red_color = 255.0 / 256.0;
-            //     var green_color = 255.0 / 256.0;
-            //     var blue_color = 102.0 / 256.0;
-            // } else if ( sphgeom_3D_S.vertices.length%3 == 2 ) {
-            //     var red_color = 153.0 / 256.0;
-            //     var green_color = 204.0 / 256.0;
-            //     var blue_color = 102.0 / 256.0;
-            // }
+            if ( sphgeom_3D_S.vertices.length%3 == 0 ) {
+                var red_color = 255.0 / 256.0;
+                var green_color = 102.0 / 256.0;
+                var blue_color = 102.0 / 256.0;
+            } else if ( sphgeom_3D_S.vertices.length%3 == 1 ) {
+                var red_color = 255.0 / 256.0;
+                var green_color = 255.0 / 256.0;
+                var blue_color = 102.0 / 256.0;
+            } else if ( sphgeom_3D_S.vertices.length%3 == 2 ) {
+                var red_color = 153.0 / 256.0;
+                var green_color = 204.0 / 256.0;
+                var blue_color = 102.0 / 256.0;
+            }
 
             // 着色方案2：灰度→彩色映射
-            // var gray_color = gray_scale(theta, phi);// 产生连续变化的灰度值1
-            var gray_color = 256.0 * sphgeom_3D_S.vertices.length / totalVertex;// 产生连续变化的灰度值2
-            // var gray_color = Math.random() * 256;// 随机产生灰度值
-            var red_color = trans_R(gray_color);
-            var green_color = trans_G(gray_color);
-            var blue_color = trans_B(gray_color);
+            // // var gray_color = gray_scale(theta, phi);// 产生连续变化的灰度值1
+            // var gray_color = Math.ceil(256.0 * sphgeom_3D_S.vertices.length / totalVertex);// 产生连续变化的灰度值2
+            // // var gray_color = Math.random() * 256;// 随机产生灰度值
+            // var red_color = trans_R(gray_color);
+            // var green_color = trans_G(gray_color);
+            // var blue_color = trans_B(gray_color);
 
             // 着色方案3：随机颜色
             // var red_color = Math.random();
@@ -290,11 +290,9 @@ function drawSphere() {
             // create sphere and add it to scene[这两步必须放到材质生成之后，jQuery中]
             sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
             sphere_3D_S.position.set(sphere_pos_3D_S.x, sphere_pos_3D_S.y, sphere_pos_3D_S.z);
-            // sphere_3D_S.scale.set( 22, 22, 22);
             scene_3D_S.add(sphere_3D_S); //模型添加到场景中
         });
     });
-
 
     // create sphere and add it to scene
     // sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
@@ -318,6 +316,18 @@ function trans_R(gray_color) {
         color_red = 1.0;
     }
     return color_red;
+
+    // 传统伪彩色编码
+    // var color_red;
+    // if (gray_color >= 0.0 && gray_color < 96.0) {
+    //     color_red = 0.0;
+    // } else if (gray_color >= 96.0 && gray_color < 128.0) {
+    //     color_red = (gray_color - 96.0) / 32.0;
+    // } else if (gray_color >= 128.0 && gray_color <= 256.0) {
+    //     color_red = 1.0;
+    // }
+    // return color_red;
+
 }
 function trans_G(gray_color) {
     var color_green;
@@ -331,6 +341,21 @@ function trans_G(gray_color) {
         color_green = (256.0 - gray_color) / 64.0;
     }
     return color_green;
+
+    // 传统伪彩色编码
+    // var color_green;
+    // if (gray_color >= 0.0 && gray_color < 32.0) {
+    //     color_green = 0.0;
+    // } else if (gray_color >= 32.0 && gray_color < 64.0) {
+    //     color_green = (gray_color - 32.0) / 32.0;
+    // } else if (gray_color >= 64.0 && gray_color < 128.0) {
+    //     color_green = 1.0;
+    // } else if (gray_color >= 128.0 && gray_color < 192.0) {
+    //     color_green = (192.0 - gray_color) / 64.0;
+    // } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+    //     color_green = (gray_color - 192.0) / 64.0;
+    // }
+    // return color_green;
 }
 function trans_B(gray_color) {
     var color_blue;
@@ -342,6 +367,21 @@ function trans_B(gray_color) {
         color_blue = 0.0;
     }
     return color_blue;
+
+    // 传统伪彩色编码
+    // var color_blue;
+    // if (gray_color >= 0.0 && gray_color < 32.0) {
+    //     color_blue = gray_color / 32.0;
+    // } else if (gray_color >= 32.0 && gray_color < 64.0) {
+    //     color_blue = 1.0;
+    // } else if (gray_color >= 64.0 && gray_color < 96.0) {
+    //     color_blue = (96.0 - gray_color) / 32.0;
+    // } else if (gray_color >= 96.0 && gray_color < 192.0) {
+    //     color_blue = 0.0;
+    // } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+    //     color_blue = (gray_color - 192.0) / 64.0;
+    // }
+    // return color_blue;
 }
 
 /* method: drawBoundingBox

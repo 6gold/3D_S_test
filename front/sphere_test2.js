@@ -88,6 +88,7 @@ function createSphere() {
     sphere_hSegs_3D_S = 60; // test value 经带数
 
     // 【生成所有顶点位置】 latNumber:纬线计数器
+    var totalVertex = (sphere_wSegs_3D_S+1)*(sphere_hSegs_3D_S+1);
     for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
         var theta = latNumber * Math.PI / sphere_wSegs_3D_S;
         var sinTheta = Math.sin(theta);
@@ -102,17 +103,6 @@ function createSphere() {
             var z = sphere_radius_3D_S * cosTheta;
             var p = new THREE.Vector3(x, y, z);
             geometry.vertices.push(p);
-
-            // geometry.colors.push( Math.sin(theta+phi) );
-            // geometry.colors.push("rgb(255, 0, 0)");
-            // 为每个顶点产生随机颜色
-            // var random_r=Math.floor(Math.random());
-            // var random_g=Math.floor(Math.random());
-            // var random_b=Math.floor(Math.random());
-            // var randomColor = new THREE.Color(random_r, random_g, random_b);
-            // var randomColor = new THREE.Color(0xFF0000);
-            // console.log(randomColor);
-            // geometry.colors.push(randomColor);
         }
     }
     // 为了把这些顶点缝合到一起，需要【建立三角面片索引列表】
@@ -131,7 +121,6 @@ function createSphere() {
             // indexData.push(first + 1);
             // indexData.push(second);
             // indexData.push(second + 1);
-
         }
     }
     // create faces
@@ -151,53 +140,32 @@ function createSphere() {
         );
 
         //着色方案1：仅用三种颜色测试
-        // var color1 = new THREE.Color(0xFF0000);//顶点1颜色——红色
-        // var color2 = new THREE.Color(0x00FF00);//顶点2颜色——绿色
-        // var color3 = new THREE.Color(0x0000FF);//顶点3颜色——蓝色
+        // var color1 = findColor2(index1);//顶点1颜色
+        // var color2 = findColor2(index2);//顶点2颜色
+        // var color3 = findColor2(index3);//顶点3颜色
 
         // 着色方案2：灰度→彩色映射
-        // 测试
+        // 尚未测试
+        // var color1 = trans_R( gray_scale(index1,totalVertex) );
+        // var color2 = trans_G( gray_scale(index2,totalVertex) );
+        // var color3 = trans_B( gray_scale(index3,totalVertex) );
 
         // 着色方案3：随机颜色
-        // var color1 = new THREE.Color(0xFFFFFF * Math.random());//顶点1颜色——红色
-        // var color2 = new THREE.Color(0xFFFFFF * Math.random());//顶点2颜色——绿色
-        // var color3 = new THREE.Color(0xFFFFFF * Math.random());//顶点3颜色——蓝色
+        var color1 = new THREE.Color(0xFFFFFF * Math.random());//顶点1颜色——红色
+        var color2 = new THREE.Color(0xFFFFFF * Math.random());//顶点2颜色——绿色
+        var color3 = new THREE.Color(0xFFFFFF * Math.random());//顶点3颜色——蓝色
+        // var color1 = new THREE.Color(getColor());//顶点1颜色——红色  产生随机色の方法2
+        // var color2 = new THREE.Color(getColor());//顶点2颜色——绿色
+        // var color3 = new THREE.Color(getColor());//顶点3颜色——蓝色
 
-        // 着色方案4：随顶点索引数随机变化
-        var color1 = findColor(index1,geometry.vertices.length);//顶点1颜色——红色
-        var color2 = findColor(index2,geometry.vertices.length);//顶点2颜色——绿色
-        var color3 = findColor(index3,geometry.vertices.length);//顶点3颜色——蓝色
-
-
+        // 着色方案4：随顶点索引数规律变化
+        // var color1 = findColor(index1,totalVertex);//顶点1颜色——红色
+        // var color2 = findColor(index2,totalVertex);//顶点2颜色——绿色
+        // var color3 = findColor(index3,totalVertex);//顶点3颜色——蓝色
 
         face.vertexColors.push(color1, color2, color3);//定义三角面三个顶点的颜色
         geometry.faces.push(face);
     }
-
-    // 重新着色
-    // var shaderMaterial;
-    // load shader
-    // $.get('assets/shaders/my.vs', function(vShader){
-    //     $.get('assets/shaders/my.fs', function(fShader){
-    //         // console.log(vShader);// test success
-    //         // console.log(fShader);// test success
-    //         shaderMaterial = new THREE.ShaderMaterial({
-    //             vertexShader: vShader,
-    //             fragmentShader: fShader
-    //         });
-    //         // create sphere and add it to scene[这两步必须放到材质生成之后，jQuery中]
-    //         sphere_3D_S = new THREE.Mesh(geometry,shaderMaterial);//网格模型对象
-    //         scene_3D_S.add(sphere_3D_S); //网格模型添加到场景中
-    //     });
-    // });
-
-    // random color material
-    // var random_material=new THREE.MeshLambertMaterial({
-    //     vertexColors: THREE.VertexColors,//以顶点颜色为准
-    //     //vertexColors: geometry.colors,//以顶点颜色为准
-    //     side: THREE.DoubleSide,//两面可见
-    //     opacity: 1.0
-    // });//材质对象
 
     var random_material=new THREE.MeshBasicMaterial({
         vertexColors: THREE.VertexColors,//以顶点颜色为准
@@ -208,39 +176,111 @@ function createSphere() {
 
     // create sphere and add it to scene
     sphere_3D_S = new THREE.Mesh(geometry,random_material);//网格模型对象
-
-    // sphere_3D_S.position.set(sphere_pos_3D_S.x, sphere_pos_3D_S.y, sphere_pos_3D_S.z);
-    // sphere_3D_S.scale.set( 22, 22, 22);
     scene_3D_S.add(sphere_3D_S); //网格模型添加到场景中
-
-
-    // var testTriangle_geom = new THREE.Geometry();
-    //
-    // var tv0 = new THREE.Vector3(0,0,1);
-    // var tv1 = new THREE.Vector3(0,0,1);
-    // var tv2 = new THREE.Vector3(0,1,1);
-    // testTriangle_geom.vertices.push(tv0,tv1,tv2);
-    //
-    // var tf = new THREE.Face3(0,1,2);
-    // var c1 = new THREE.Color(0xFF0000);//顶点1颜色——红色
-    // var c2 = new THREE.Color(0x00FF00);//顶点2颜色——绿色
-    // var c3 = new THREE.Color(0x0000FF);//顶点3颜色——蓝色
-    // tf.vertexColors.push(c1, c2, c3);//定义三角面三个顶点的颜色
-    // testTriangle_geom.faces.push(tf);
-    //
-    // var random_material=new THREE.MeshLambertMaterial({
-    //         vertexColors: THREE.VertexColors,//以顶点颜色为准
-    //         //vertexColors: geometry.colors,//以顶点颜色为准
-    //         side: THREE.DoubleSide,//两面可见
-    //         opacity: 1.0
-    //     });//材质对象
-    // var testTriangle = new THREE.Mesh(testTriangle_geom,random_material);
-    // testTriangle.scale.set(20,20,20);
-    // scene_3D_S.add(testTriangle);
 }
 
-// 测试用：根据顶点索引是否能整除3产生固定颜色
+// 测试用：根据顶点索引产生连续变化的颜色
 function findColor(index,total) {
     var ratio = 1.0 * index / total;
     return new THREE.Color(0xFFFFFF * ratio);
 }
+
+function findColor2(index) {
+    if (index % 3==0) {
+        return new THREE.Color(0xFF6666);
+    } else if (index % 3==1) {
+        return new THREE.Color(0xFFFF66);
+    } else if (index % 3==2) {
+        return new THREE.Color(0x99CC66);
+    }
+}
+
+// 随机生成16进制的颜色值
+function getColor(){
+    var r=Math.floor(Math.random()*256);
+    var g=Math.floor(Math.random()*256);
+    var b=Math.floor(Math.random()*256);
+    return "rgb("+r+','+g+','+b+")";
+}
+
+// function gray_scale(index,total) {
+//     // var gray_value = Math.ceil(Math.sin(theta+phi) * 256);
+//     return Math.ceil(256 * index / total);
+// }
+// function trans_R(gray_color) {
+//     var color_red;
+//     if (gray_color >= 0.0 && gray_color < 128.0) {
+//         color_red = 0.0;
+//     }else if (gray_color >= 128.0 && gray_color < 192.0) {
+//         color_red = (gray_color - 128.0) / 64.0;
+//     }else if (gray_color >= 192.0 && gray_color <= 256.0) {
+//         color_red = 1.0;
+//     }
+//     return color_red;
+//
+//     // 传统伪彩色编码
+//     // var color_red;
+//     // if (gray_color >= 0.0 && gray_color < 96.0) {
+//     //     color_red = 0.0;
+//     // } else if (gray_color >= 96.0 && gray_color < 128.0) {
+//     //     color_red = (gray_color - 96.0) / 32.0;
+//     // } else if (gray_color >= 128.0 && gray_color <= 256.0) {
+//     //     color_red = 1.0;
+//     // }
+//     // return color_red;
+//
+// }
+// function trans_G(gray_color) {
+//     var color_green;
+//     if (gray_color >= 0.0 && gray_color < 64.0) {
+//         color_green = 0.0;
+//     }else if (gray_color >= 64.0 && gray_color < 128.0) {
+//         color_green = (gray_color - 64.0) / 64.0;
+//     }else if (gray_color >= 128.0 && gray_color < 192.0) {
+//         color_green = 1.0;
+//     } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+//         color_green = (256.0 - gray_color) / 64.0;
+//     }
+//     return color_green;
+//
+//     // 传统伪彩色编码
+//     // var color_green;
+//     // if (gray_color >= 0.0 && gray_color < 32.0) {
+//     //     color_green = 0.0;
+//     // } else if (gray_color >= 32.0 && gray_color < 64.0) {
+//     //     color_green = (gray_color - 32.0) / 32.0;
+//     // } else if (gray_color >= 64.0 && gray_color < 128.0) {
+//     //     color_green = 1.0;
+//     // } else if (gray_color >= 128.0 && gray_color < 192.0) {
+//     //     color_green = (192.0 - gray_color) / 64.0;
+//     // } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+//     //     color_green = (gray_color - 192.0) / 64.0;
+//     // }
+//     // return color_green;
+// }
+// function trans_B(gray_color) {
+//     var color_blue;
+//     if (gray_color >= 0.0 && gray_color < 64.0) {
+//         color_blue = gray_color / 64.0;
+//     }else if (gray_color >= 64.0 && gray_color < 128.0) {
+//         color_blue = (128.0 - gray_color) / 64.0;
+//     }else if (gray_color >= 128.0 && gray_color <= 256.0) {
+//         color_blue = 0.0;
+//     }
+//     return color_blue;
+//
+//     // 传统伪彩色编码
+//     // var color_blue;
+//     // if (gray_color >= 0.0 && gray_color < 32.0) {
+//     //     color_blue = gray_color / 32.0;
+//     // } else if (gray_color >= 32.0 && gray_color < 64.0) {
+//     //     color_blue = 1.0;
+//     // } else if (gray_color >= 64.0 && gray_color < 96.0) {
+//     //     color_blue = (96.0 - gray_color) / 32.0;
+//     // } else if (gray_color >= 96.0 && gray_color < 192.0) {
+//     //     color_blue = 0.0;
+//     // } else if (gray_color >= 192.0 && gray_color <= 256.0) {
+//     //     color_blue = (gray_color - 192.0) / 64.0;
+//     // }
+//     // return color_blue;
+// }
