@@ -1,4 +1,11 @@
 'use strict';
+// UI
+var stats_3D_S = initStats(); // 显示实时渲染帧数
+var gui_3D_S;
+var controls_3D_S; // gui控制属性
+
+var uniforms_test;
+var test_alpha;
 
 // model variables
 var object3D_S;
@@ -25,6 +32,7 @@ var stlloader_3D_S;
 
 
 // -----------------------------call functions---------------------------------------
+// initialize WebGL
 initWebGL_S();
 
 // set STL loader
@@ -32,10 +40,14 @@ stlloader_3D_S=new THREE.STLLoader();
 var callbackOnLoadSTL_3D_S = function (modelgeom) {
     drawModel_S(modelgeom);
     drawSphere();
-    // drawBoundingBox_S();
+    // drawBoundingBox_S(); // [test] draw AABB boundingBox
 };
 stlloader_3D_S.load('http://localhost:3000/../models/test.stl',callbackOnLoadSTL_3D_S);
 
+// initialize GUI
+// initControls();
+
+// render
 render_3D_S();
 
 // ---------------------------definition of functions--------------------------------
@@ -93,10 +105,12 @@ function initWebGL_S() {
    args: none
    function: render */
 function render_3D_S() {
+    stats_3D_S.update();
+
     requestAnimationFrame(render_3D_S);
     if (!renderer_3D_S.autoClear) renderer_3D_S.clear();
 
-    // update values
+    // // update angle values
     // console.log(camera_3D_S.rotation.x);
     // document.getElementById("center_X_3D_S").innerHTML = Math.ceil(camera_3D_S.position.x).toString();
     // document.getElementById("center_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.position.y).toString();
@@ -110,7 +124,7 @@ function render_3D_S() {
 }
 
 /* method: drawModel
-   args: none
+   args: modelgeom: returned by model loader
    function:  */
 function drawModel_S(modelgeom) {
     // ---------------------------create model-----------------------------------
@@ -126,22 +140,20 @@ function drawModel_S(modelgeom) {
     object3D_S = new THREE.Mesh(modelgeom, modelmat_3D_S);
     // calculate boundingBox
     boundingBox_3D_S = new THREE.Box3().setFromObject(object3D_S);// bounding box
-    console.log(boundingBox_3D_S);
+    // console.log(boundingBox_3D_S); // [test] print boundingBox
     // calculate number of vertexes and faces
     // ......
 
-    // object3D_S.position.set( 0, - 0.25, 0.6 );
     object3D_S.rotation.set( - Math.PI / 2, 0, 0 );
-    // object3D_S.scale.set( 20, 20, 20);
     // add mesh to the scene
     scene_3D_S.add(object3D_S);
 }
 
-/* method: drawModel
+/* method: drawSphere
    args: none
    function:  */
 function drawSphere() {
-    // create radius and position
+    // calculate radius and position
     var sqrt_3D_S = Math.sqrt(
         (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) * (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) +
         (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) * (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) +
@@ -149,7 +161,7 @@ function drawSphere() {
     );
     sphere_radius_3D_S = Math.ceil(sqrt_3D_S) / 2;
     sphere_pos_3D_S = new THREE.Vector3(
-        // 包围盒中心点
+        // center point of the boundingBox
         (boundingBox_3D_S.max.x + boundingBox_3D_S.min.x) / 2,
         (boundingBox_3D_S.max.y + boundingBox_3D_S.min.y) / 2,
         (boundingBox_3D_S.max.z + boundingBox_3D_S.min.z) / 2
@@ -162,7 +174,7 @@ function drawSphere() {
     sphere_hSegs_3D_S = 60; // test value 经带数
 
     // 重新着色
-    // ShaderMaterial测试
+    // ShaderMaterial
     var attributes = {
         color_r: {
             type: 'f', // a float
@@ -177,13 +189,19 @@ function drawSphere() {
             value: [] // an empty array
         }
     };
+    uniforms_test = {
+        vAlpha:{
+            type: 'f',
+            value: 0.6
+        }
+    };
     // now populate the array of attributes
     var color_r = attributes.color_r.value;
     var color_g = attributes.color_g.value;
     var color_b = attributes.color_b.value;
 
     // 【生成所有顶点位置】 latNumber:纬线计数器
-    var totalVertex = (sphere_wSegs_3D_S+1)*(sphere_hSegs_3D_S+1);
+    var totalVertex = (sphere_wSegs_3D_S+1)*(sphere_hSegs_3D_S+1); // 球面上顶点总数
     for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
         var theta = latNumber * Math.PI / sphere_wSegs_3D_S;
         var sinTheta = Math.sin(theta);
@@ -198,7 +216,6 @@ function drawSphere() {
             var z = sphere_radius_3D_S * cosTheta;
             var p = new THREE.Vector3(x, y, z);
             sphgeom_3D_S.vertices.push(p);
-            // 重新着色(伪彩色编码)
 
             //着色方案1：仅用三种颜色测试
             if ( sphgeom_3D_S.vertices.length%3 == 0 ) {
@@ -268,24 +285,18 @@ function drawSphere() {
         sphgeom_3D_S.faces.push(face);
     }
 
-    // // random color material
-    // var sphmat=new THREE.MeshLambertMaterial({
-    //     vertexColors: THREE.VertexColors,//以顶点颜色为准
-    //     side: THREE.DoubleSide,//两面可见
-    //     transparent: true,
-    //     opacity: 1.0
-    // });//材质对象
-
     // // load shader
     $.get('http://localhost:3000/../shaders/my.vs', function(vShader){
         $.get('http://localhost:3000/../shaders/my.fs', function(fShader){
-            // console.log(vShader); // test success
-            // console.log(fShader); // test success
+            // console.log(vShader); // test success!
+            // console.log(fShader); // test success!
             sphmat_3D_S = new THREE.ShaderMaterial({
                 vertexShader: vShader,
                 fragmentShader: fShader,
                 attributes: attributes,
-                transparent: true
+                uniforms: uniforms_test,
+                transparent: true,
+                side: THREE.DoubleSide
             });
             // create sphere and add it to scene[这两步必须放到材质生成之后，jQuery中]
             sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
@@ -293,12 +304,6 @@ function drawSphere() {
             scene_3D_S.add(sphere_3D_S); //模型添加到场景中
         });
     });
-
-    // create sphere and add it to scene
-    // sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
-    // sphere_3D_S.position.set(0, 0, 0);
-    // sphere_3D_S.scale.set( 22, 22, 22);
-    // scene_3D_S.add(sphere_3D_S); //网格模型添加到场景中
 }
 
 function gray_scale(theta, phi) {
@@ -306,6 +311,7 @@ function gray_scale(theta, phi) {
     var gray_value = Math.ceil(Math.sin(theta) * 256);
     return gray_value;
 }
+
 function trans_R(gray_color) {
     var color_red;
     if (gray_color >= 0.0 && gray_color < 128.0) {
@@ -327,8 +333,8 @@ function trans_R(gray_color) {
     //     color_red = 1.0;
     // }
     // return color_red;
-
 }
+
 function trans_G(gray_color) {
     var color_green;
     if (gray_color >= 0.0 && gray_color < 64.0) {
@@ -357,6 +363,7 @@ function trans_G(gray_color) {
     // }
     // return color_green;
 }
+
 function trans_B(gray_color) {
     var color_blue;
     if (gray_color >= 0.0 && gray_color < 64.0) {
@@ -442,7 +449,6 @@ function drawBoundingBox_S() {
     vertex_system.rotation.set( - Math.PI / 2, 0, 0 );
     scene_3D_S.add(vertex_system);
 
-
     // 测试用 - create sphere
     // create radius and position
     var sqrt_3D_S = Math.sqrt(
@@ -478,29 +484,96 @@ function findColor(index,total) {
     return new THREE.Color(0xFFFFFF * ratio);
 }
 
+/* method: initStats
+   args: none
+   function:  */
+function initStats() {
+    var stats = new Stats();
+    stats.setMode(0); // 0: fps, 1: ms
+    // Align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.getElementById("Stats-output").appendChild(stats.domElement);
+    return stats;
+}
+
+function initControls() {
+    controls_3D_S = new function () {
+        this.opacity = sphmat_3D_S.uniforms.vAlpha.value;
+        this.transparent = sphmat_3D_S.transparent;
+    };
+    gui_3D_S = new dat.GUI();
+    var spGui = gui_3D_S.addFolder("Sphere");
+    spGui.add(controls_3D_S, 'opacity', 0, 1).onChange(function (e) {
+        sphmat_3D_S.uniforms.vAlpha.value = e
+    });
+    spGui.add(controls_3D_S, 'transparent').onChange(function (e) {
+        sphmat_3D_S.transparent = e
+    });
+}
+
+
+
+
+
+
 // create rcs data
-// function RCS_s(t, f,r_d) {
-//     this.t = t;
-//     this.f = f;
-//     this.r_d = r_d;
-// }
-// function readRCS() {
-    // read rcs data
-// var rcs_s=[];
-// var rcsLength_s;
-// $.get("http://localhost:3000/rcs1", function( data ) {
-//     var rows = data.split('\n');
-//     for (let row of rows) {
-//         const row1 = row.replace(/\s+/g, ' ');
-//         let rows = row1.split(' ');
-//         rcs_s.push(new RCS_s(rows[1], rows[2], rows[3]))
-//     }
-//     rcs_s.shift();
-//     rcsLength_s = rcs_s.length;
-//     console.log(rcs_s);
-//     console.log(rcsLength_s);
-// });
-// }
+function RCS_s(t, f, r_d) {
+    this.t = t;
+    this.f = f;
+    this.r_d = r_d;
+}
+
+function readRCS() {
+    // 定义rcs数据数组
+    var rcs_Array = new Array();
+    for (var i = 0; i < 180; i++) { // theta (0 ~ 90)
+        rcs_Array[i] = new Array();
+        for (var j = 0; j < 360; j++) { // phi (-180 ~ +180)
+            rcs_Array[i][j] = 0.0; // 初始值为0.0
+        }
+    }
+    // 读取&&分析文件
+    var rcs_s = []; // 存放文件字符串
+    var rcsLength_s;
+    $.get("http://localhost:3000/data/rcs1", function (data) {
+        var rows = data.split('\n'); // 按行划分
+        for (let row of rows) {
+            const current_row = row.replace(/\s+/g, ' '); // 将每一行中多个空格替换成一个空格
+            let rows = current_row.split(' '); // 每一行用一个空格分割
+            var current_theta = parseInt(row[1]);
+            var current_phi = parseInt(row[2]) + 180;
+            rcs_Array[current_theta][current_phi] = rows[3];
+            // const row1 = row.replace(/\s+/g, ' '); // 将每一行中多个空格替换成一个空格
+            // let rows = row1.split(' '); // 将每一行中多个空格替换成一个空格
+            //
+            // rcs_s.push(new RCS_s(rows[1], rows[2], rows[3]))
+        }
+        rcs_s.shift();
+        rcsLength_s = rcs_s.length;
+        console.log(rcs_s);
+        console.log(rcsLength_s);
+    });
+}
+
+// 创建测试用的rcs文件
+function create_rcs_file(step1, step2) {
+
+    // step1 = parseInt(step1);
+    // step2 = parseInt(step2);
+
+    var num1 = 90/step1;
+    var num2 = 360/step2;
+    var theta = 0, phi = 0;
+    for (var i=0; i<=num1; i++) {
+        theta = parseFloat(i * step1);
+        for (var j=0; j<=num2; j++) {
+            phi = parseFloat(j * step2);
+            var random_rcs = Math.random() * 100.0000 - 50.0000; // 随机产生-50~50之内的随机数
+        }
+    }
+}
 
 
 // set OBJ loader

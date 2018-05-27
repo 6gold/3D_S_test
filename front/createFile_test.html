@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>create rcs file test</title>
+        <meta charset="utf-8">
+        <!--import stylesheet-->
+        <link rel="stylesheet" href="stylesheets/style_3D_S.css" type="text/css"/>
+    </head>
+
+    <body>
+        <!--引入必要的js文件-->
+        <script src="javascripts/jquery-3.3.1.min.js"></script>
+        <script>
+            // create rcs data
+            function readRCS() {
+                // 定义rcs数据数组
+                var rcs_Array = new Array();
+                for (var i = 0; i < 180; i++) { // theta (0 ~ 90)
+                    rcs_Array[i] = new Array();
+                    for (var j = 0; j < 360; j++) { // phi (-180 ~ +180)
+                        rcs_Array[i][j] = 0.0; // 初始值为0.0
+                    }
+                }
+                // 读取&&分析文件
+                var rcs_s = []; // 存放文件字符串
+                var rcsLength_s;
+                $.get("http://localhost:3000/data/rcs1", function (data) {
+                    var rows = data.split('\n'); // 按行划分
+                    for (let row of rows) {
+                        const current_row = row.replace(/\s+/g, ' '); // 将每一行中多个空格替换成一个空格
+                        let rows = current_row.split(' '); // 每一行用一个空格分割
+                        var current_theta = parseInt(row[1]);
+                        var current_phi = parseInt(row[2]) + 180;
+                        rcs_Array[current_theta][current_phi] = rows[3];
+                        // const row1 = row.replace(/\s+/g, ' '); // 将每一行中多个空格替换成一个空格
+                        // let rows = row1.split(' '); // 将每一行中多个空格替换成一个空格
+                        //
+                        // rcs_s.push(new RCS_s(rows[1], rows[2], rows[3]))
+                    }
+                    rcs_s.shift();
+                    rcsLength_s = rcs_s.length;
+                    console.log(rcs_s);
+                    console.log(rcsLength_s);
+                });
+            }
+
+            // create src file
+            function create_rcs_file(step1, step2) {
+
+                // step1 = parseInt(step1);
+                // step2 = parseInt(step2);
+
+                var num1 = 90/step1;
+                var num2 = 360/step2;
+                var theta = 0, phi = 0;
+                for (var i=0; i<=num1; i++) {
+                    theta = parseFloat(i * step1);
+                    for (var j=0; j<=num2; j++) {
+                        phi = parseFloat(j * step2);
+                        var random_rcs = Math.random() * 100.0000 - 50.0000; // 随机产生-50~50之内的随机数
+                    }
+                }
+            }
+        </script>
+
+    </body>
+</html>
