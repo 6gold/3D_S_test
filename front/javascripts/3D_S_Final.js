@@ -17,7 +17,7 @@ var sphere_wSegs_3D_S=180;  // 纬线带数目(test)
 var sphere_hSegs_3D_S=360;  // 经线带数目(test)
 var sphgeom_3D_S;           // sphere object
 var sphmat_3D_S;            // sphere material
-var rcsArray_3D_S;          // rcs数组
+var rcsArray_3D_S=[];          // rcs数组
 var RCSmax_3D_S,RCSmin_3D_S;// rcs的最大最小值
 var vertexColorArray_3D_S;  // 顶点颜色数组
 var verColorArrLen_3D_S;    // 顶点颜色数组长度
@@ -135,7 +135,6 @@ function drawModel_S(modelgeom) {
 function readRCSFile() {
     // 读取&&分析文件
     $.get("./testData/f117.txt", function (data) {
-        rcsArray_3D_S = [];
         RCSmax_3D_S=parseFloat("0.0");
         RCSmin_3D_S=parseFloat("1.0");
 
@@ -154,7 +153,7 @@ function readRCSFile() {
             }
         }
         // rcsArrayLen_3D_S = rcsArray_3D_S.length;
-        // console.log(rcsArray_3D_S);
+        // console.log(rcsArray_3D_S[5]);
         // console.log(rcsArrayLen_3D_S);
         // console.log(RCSmax);
         // console.log(RCSmin);
@@ -183,6 +182,7 @@ function drawSphere() {
     sphgeom_3D_S = new THREE.Geometry(); // define a blank geometry
 
     // 【生成所有顶点位置和颜色】 latNumber:纬线计数器
+    vertexColorArray_3D_S = [];
     for (var latNumber=0; latNumber<=sphere_wSegs_3D_S; latNumber++) {
         var theta = latNumber * Math.PI / sphere_wSegs_3D_S; // θ
         var sinTheta = Math.sin(theta);
@@ -200,19 +200,28 @@ function drawSphere() {
 
             // 伪彩色映射
             // 从数组里取rcs
-            rcsArray_3D_S[]
+            var index = parseInt(181*longNumber+latNumber);
+            console.log(rcsArray_3D_S);
+            // console.log(rcsArray_3D_S[5]);
 
-            var gray_color = 256.0 *
-            var RCSmax_3D_S,RCSmin_3D_S;// rcs的最大最小值
-            var vertexColorArray_3D_S;  // 顶点颜色数组
+            var rcs = rcsArray_3D_S[index];
+            // 生成灰度值
+            var gray_color = 256.0 * rcs / (RCSmax_3D_S - RCSmin_3D_S);
+            // var gray_color = rcs;
+            // console.log(gray_color);
+            // // 灰度值伪彩色化
+            // var red_color = parseInt(256.0 * trans_R(gray_color));
+            // var green_color = parseInt(256.0 * trans_G(gray_color));
+            // var blue_color = parseInt(256.0 * trans_B(gray_color));
+            var red_color = trans_R(gray_color);
+            var green_color = trans_G(gray_color);
+            var blue_color = trans_B(gray_color);
 
-            // 将rcs值映射到灰度上
-            // 灰度值伪彩色化
-            // var red_color = trans_R(gray_color);
-            // var green_color = trans_G(gray_color);
-            // var blue_color = trans_B(gray_color);
             // 产生对应的颜色，push到颜色数组中
+            // console.log(new THREE.Vector3(red_color,green_color,blue_color));
 
+            // vertexColorArray_3D_S.push(new THREE.Color("rgb("+red_color+","+green_color+","+blue_color+")"));
+            vertexColorArray_3D_S.push(new THREE.Color(red_color,green_color,blue_color));
             // console.log(new THREE.Vector3(red_color,green_color,blue_color));
         }
     }
@@ -238,10 +247,10 @@ function drawSphere() {
         var index2 = indexData[vertexCounter+1];
         var index3 = indexData[vertexCounter+2];
         var face = new THREE.Face3(index1, index2, index3);
-        // var color1 = 颜色数组(index1);
-        // var color2 = 颜色数组(index2);
-        // var color3 = 颜色数组(index3);
-        // face.vertexColors.push(color1, color2, color3);//定义三角面三个顶点的颜色
+        var color1 = vertexColorArray_3D_S[index1];
+        var color2 = vertexColorArray_3D_S[index2];
+        var color3 = vertexColorArray_3D_S[index3];
+        face.vertexColors.push(color1, color2, color3);//定义三角面三个顶点的颜色
         sphgeom_3D_S.faces.push(face);
     }
 
@@ -261,7 +270,7 @@ function drawSphere() {
     sphmat_3D_S_test.wireframe = true;
 
     // create sphere and add it to scene
-    sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S_test);//网格模型对象
+    sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);//网格模型对象
     scene_3D_S.add(sphere_3D_S); //网格模型添加到场景中
 }
 
