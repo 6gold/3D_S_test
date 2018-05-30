@@ -14,11 +14,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="sphere_test2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/sphere_test2.html">
+      <file leaf-file-name="3D_S_Final.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/3D_S_Final.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+            <state relative-caret-position="84">
+              <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="3D_S_Final.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/front/javascripts/3D_S_Final.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="191" column="39" lean-forward="true" selection-start-line="191" selection-start-column="39" selection-end-line="191" selection-end-column="39" />
+              <folding>
+                <element signature="e#1278#2809#0" />
+                <element signature="e#2894#3818#0" />
+                <element signature="e#3935#4667#0" />
+                <element signature="e#5043#5051#0" />
+                <element signature="e#9067#9522#0" />
+                <element signature="e#11047#11190#0" />
+                <element signature="e#11221#11898#0" />
+                <element signature="e#11929#12966#0" />
+                <element signature="e#12997#13914#0" />
+                <element signature="e#14003#17619#0" />
+                <element signature="e#17705#17791#0" />
+                <element signature="e#15606#15931#0" />
+                <element signature="e#15957#16399#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -26,9 +50,10 @@
       <file leaf-file-name="sphere_test2.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front/javascripts/sphere_test2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="261" column="23" selection-start-line="261" selection-start-column="23" selection-end-line="261" selection-end-column="23" />
+            <state relative-caret-position="-1428">
+              <caret line="63" selection-start-line="63" selection-end-line="65" selection-end-column="15" />
               <folding>
+                <element signature="e#4537#6180#0" />
                 <element signature="e#6612#6698#0" />
                 <element signature="e#6727#6948#0" />
                 <element signature="e#6985#7148#0" />
@@ -38,85 +63,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="3D_S.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/3D_S.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1036">
-              <caret line="37" lean-forward="true" selection-end-line="39" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="3D_S.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front/javascripts/3D_S.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="520" selection-start-line="520" selection-end-line="575" selection-end-column="1" />
+            <state relative-caret-position="375">
+              <caret line="297" column="23" lean-forward="true" selection-start-line="297" selection-start-column="23" selection-end-line="297" selection-end-column="23" />
               <folding>
-                <element signature="e#1048#2579#0" />
-                <element signature="e#3639#4432#0" />
-                <element signature="e#6135#8587#0" />
-                <element signature="e#8719#9174#0" />
-                <element signature="e#9277#9766#0" />
-                <element signature="e#11113#11256#0" />
-                <element signature="e#11286#11964#0" />
-                <element signature="e#11994#13031#0" />
-                <element signature="e#13061#13978#0" />
-                <element signature="e#14067#17684#0" />
-                <element signature="e#17770#17856#0" />
-                <element signature="e#17890#17898#0" />
-                <element signature="e#17467#17522#0" />
-                <element signature="e#17543#18250#0" />
-                <element signature="e#18692#18700#0" />
+                <element signature="e#1276#2807#0" />
+                <element signature="e#3933#4665#0" />
+                <element signature="e#11045#11188#0" />
+                <element signature="e#11219#11896#0" />
+                <element signature="e#11927#12964#0" />
+                <element signature="e#12995#13912#0" />
+                <element signature="e#14001#17617#0" />
+                <element signature="e#17703#17789#0" />
+                <element signature="e#17864#18181#0" />
+                <element signature="e#18207#18677#0" />
+                <element signature="e#18729#18784#0" />
+                <element signature="e#18805#19938#0" />
+                <element signature="e#19994#20395#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createFile_test.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front/createFile_test.html">
+      <file leaf-file-name="boundingBox_test.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front/boundingBox_test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+            <state relative-caret-position="1719">
+              <caret line="136" selection-start-line="136" selection-end-line="136" />
               <folding>
-                <element signature="e#498#1631#0" />
+                <element signature="n#!!block;n#initWebGL_S#0" />
+                <element signature="n#!!block;n#render_3D_S#0" />
+                <element signature="n#!!block;n#readRCS#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="combine.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front/combine.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="571">
-              <caret line="157" column="38" lean-forward="true" selection-start-line="157" selection-start-column="38" selection-end-line="157" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my.vs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/public/shaders/my.vs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my.fs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/public/shaders/my.fs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rcs_test1" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/public/data/rcs_test1">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -126,8 +106,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -140,9 +120,17 @@
       <find>this.blending</find>
       <find>step</find>
       <find>stats</find>
-      <find>initStats</find>
       <find>gui_3D_S</find>
       <find>initControls</find>
+      <find>initStats</find>
+      <find>rcsData1</find>
+      <find>rcsData</find>
+      <find>0</find>
+      <find>0.0</find>
+      <find>0.000000</find>
+      <find>0.000000</find>
+      <find>123.955026</find>
+      <find>stats_3D_S</find>
     </findStrings>
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -153,9 +141,7 @@
       <list>
         <option value="$PROJECT_DIR$/front/index.html" />
         <option value="$PROJECT_DIR$/front/backup_edition.html" />
-        <option value="$PROJECT_DIR$/src/app.js" />
         <option value="$PROJECT_DIR$/front/color_test.html" />
-        <option value="$PROJECT_DIR$/front/boundingBox_test.html" />
         <option value="$PROJECT_DIR$/front/shader.js" />
         <option value="$PROJECT_DIR$/front/assets/shaders/my.vs" />
         <option value="$PROJECT_DIR$/front/assets/shaders/my.fs" />
@@ -164,7 +150,6 @@
         <option value="$PROJECT_DIR$/front/buffer_test.html" />
         <option value="$PROJECT_DIR$/front/color_test.js" />
         <option value="$PROJECT_DIR$/front/combine.js" />
-        <option value="$PROJECT_DIR$/front/boundingBox_test.js" />
         <option value="$PROJECT_DIR$/src/public/shaders/my.fs" />
         <option value="$PROJECT_DIR$/src/public/data/rcs_test1" />
         <option value="$PROJECT_DIR$/front/3D_S.html" />
@@ -172,9 +157,17 @@
         <option value="$PROJECT_DIR$/front/sphere_test2.js" />
         <option value="$PROJECT_DIR$/front/sphere_test2.html" />
         <option value="$PROJECT_DIR$/src/public/shaders/my.vs" />
-        <option value="$PROJECT_DIR$/front/javascripts/sphere_test2.js" />
-        <option value="$PROJECT_DIR$/front/javascripts/3D_S.js" />
         <option value="$PROJECT_DIR$/front/createFile_test.html" />
+        <option value="$PROJECT_DIR$/front/boundingBox_test.html" />
+        <option value="$PROJECT_DIR$/front/boundingBox_test.js" />
+        <option value="$PROJECT_DIR$/front/javascripts/3D_S.js" />
+        <option value="$PROJECT_DIR$/front/3D_S_Final.js" />
+        <option value="$PROJECT_DIR$/front/3D_S_Final.html" />
+        <option value="$PROJECT_DIR$/front/javascripts/sphere_test2.js" />
+        <option value="$PROJECT_DIR$/../mx/demo/front/javascripts/3D_M.js" />
+        <option value="$PROJECT_DIR$/src/app.js" />
+        <option value="$PROJECT_DIR$/front/testData/f117.txt" />
+        <option value="$PROJECT_DIR$/front/javascripts/3D_S_Final.js" />
       </list>
     </option>
   </component>
@@ -188,8 +181,8 @@
     <handled-path value="$PROJECT_DIR$/src/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="697" />
+    <option name="x" value="111" />
+    <option name="width" value="1023" />
     <option name="height" value="745" />
   </component>
   <component name="ProjectView">
@@ -197,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -209,11 +203,48 @@
               <item name="demo" type="462c0819:PsiDirectoryNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="front" type="462c0819:PsiDirectoryNode" />
+              <item name="testData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="demo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,11 +259,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lenovo\Desktop\bysj\code\demo\front\testData" />
+      <recent name="C:\Users\lenovo\Desktop\bysj\code\demo\src\public\data" />
+      <recent name="C:\Users\lenovo\Desktop\demo\src\public\models" />
+      <recent name="C:\Users\lenovo\Desktop\demo\front\javascripts\loaders" />
       <recent name="C:\Users\lenovo\Desktop\demo\front\javascripts" />
-      <recent name="C:\Users\lenovo\Desktop\demo\src\public\shaders" />
-      <recent name="C:\Users\lenovo\Desktop\demo\src\public\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lenovo\Desktop\bysj\code\demo\front\javascripts" />
       <recent name="C:\Users\lenovo\Desktop\demo\front\javascripts" />
       <recent name="C:\Users\lenovo\Desktop\demo\front" />
     </key>
@@ -272,20 +306,24 @@
       <workItem from="1527183542094" duration="20511000" />
       <workItem from="1527222720498" duration="15894000" />
       <workItem from="1527403645239" duration="13770000" />
+      <workItem from="1527442536354" duration="1532000" />
+      <workItem from="1527593590040" duration="4689000" />
+      <workItem from="1527675389147" duration="14745000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89116000" />
+    <option name="totallyTimeSpent" value="110082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22767204" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16983895" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32852563" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -298,7 +336,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32852563" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,107 +350,86 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
           <line>172</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
           <line>173</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
           <line>560</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
           <line>527</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
           <line>521</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/front/javascripts/3D_S.js</url>
+          <line>500</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/front/javascripts/3D_S_Final.js</url>
+          <line>240</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/front/javascripts/3D_S_Final.js</url>
+          <line>241</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/front/javascripts/3D_S_Final.js</url>
+          <line>242</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>33</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>34</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>35</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>63</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app.js</url>
+          <line>64</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="33" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/front/boundingBox_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4200">
-          <caret line="150" column="6" selection-start-line="145" selection-start-column="13" selection-end-line="150" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!block;n#initWebGL_S#0" />
-            <element signature="n#!!block;n#render_3D_S#0" />
-            <element signature="n#!!block;n#readRCS#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/color_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3892">
-          <caret line="139" column="40" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/combine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4452">
-          <caret line="159" column="45" selection-start-line="83" selection-start-column="4" selection-end-line="159" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/shaders/my.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/shaders/my.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/color_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/color_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3472">
-          <caret line="124" column="44" lean-forward="true" selection-start-line="124" selection-start-column="44" selection-end-line="124" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/shaders/my.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="29" lean-forward="true" selection-start-column="29" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/buffer_test.html" />
-    <entry file="file://$PROJECT_DIR$/front/color_test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2352">
-          <caret line="84" column="28" selection-start-line="84" selection-start-column="28" selection-end-line="84" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/color_test.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="700">
@@ -467,13 +483,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/front/javascripts/dataReader.js" />
     <entry file="file://$PROJECT_DIR$/front/javascripts/3D_M.js" />
-    <entry file="file://$PROJECT_DIR$/src/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/front/shader.js" />
     <entry file="file://D:/个人文件/学习/大四/毕设/WebGL/Learning Threejs/learning-threejs-master/libs/three.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -486,13 +495,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="47" column="20" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/boundingBox_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="980">
-          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -523,51 +525,80 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/data/test.rcs">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/data/test1.rcs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="12" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/public/data/test1.rcs" />
     <entry file="file://D:/个人文件/学习/大四/毕设/WebGL/Learning Threejs/learning-threejs-master/chapter-04/01-basic-mesh-material.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="207" column="17" selection-start-line="207" selection-start-column="12" selection-end-line="207" selection-end-column="17" />
-          <folding>
-            <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
-            <element signature="e#3589#4797#0" />
-            <element signature="e#4247#4787#0" />
-            <element signature="e#5572#6010#0" />
-            <element signature="e#6077#6131#0" />
-            <element signature="e#6229#6693#0" />
-            <element signature="e#6858#6907#0" />
-            <element signature="e#7010#7068#0" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/data/rcs_test1">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="3" column="39" lean-forward="true" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/public/data/rcs_test1" />
     <entry file="file://$PROJECT_DIR$/src/public/shaders/my.fs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="56">
-          <caret line="2" column="13" lean-forward="true" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/public/shaders/my.vs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/combine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4088">
+          <caret line="146" column="37" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/public/models/f117.stl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2223375" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/sphere_test2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/javascripts/loaders/STLLoader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/boundingBox_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/3D_S.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="17" column="22" selection-end-line="39" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/createFile_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front/boundingBox_test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="199" column="73" selection-start-line="199" selection-start-column="73" selection-end-line="199" selection-end-column="73" />
+        <state relative-caret-position="1719">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
           <folding>
             <element signature="n#!!block;n#initWebGL_S#0" />
             <element signature="n#!!block;n#render_3D_S#0" />
@@ -576,32 +607,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/public/shaders/my.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="24" lean-forward="true" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+    <entry file="uml://JavaScript-modules-diagram/C:/Users/lenovo/Desktop/bysj/code/demo/front/javascripts/3D_S_Final.js">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/front/javascripts/3D_S_Final.js</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="565.5" y="277.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/combine.js">
+    <entry file="file://$PROJECT_DIR$/src/public/data/f117.ffe">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mx/demo/src/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="157" column="38" lean-forward="true" selection-start-line="157" selection-start-column="38" selection-end-line="157" selection-end-column="38" />
+        <state relative-caret-position="431">
+          <caret line="68" column="37" selection-start-line="68" selection-start-column="37" selection-end-line="68" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/sphere_test2.html">
+    <entry file="file://$PROJECT_DIR$/front/testData/f117.stl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/javascripts/3D_S.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        <state relative-caret-position="375">
+          <caret line="297" column="23" lean-forward="true" selection-start-line="297" selection-start-column="23" selection-end-line="297" selection-end-column="23" />
+          <folding>
+            <element signature="e#1276#2807#0" />
+            <element signature="e#3933#4665#0" />
+            <element signature="e#11045#11188#0" />
+            <element signature="e#11219#11896#0" />
+            <element signature="e#11927#12964#0" />
+            <element signature="e#12995#13912#0" />
+            <element signature="e#14001#17617#0" />
+            <element signature="e#17703#17789#0" />
+            <element signature="e#17864#18181#0" />
+            <element signature="e#18207#18677#0" />
+            <element signature="e#18729#18784#0" />
+            <element signature="e#18805#19938#0" />
+            <element signature="e#19994#20395#0" />
+          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/3D_S_Final.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mx/demo/front/javascripts/3D_M.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="58" selection-start-line="58" selection-end-line="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/testData/my.fs">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/front/javascripts/sphere_test2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="261" column="23" selection-start-line="261" selection-start-column="23" selection-end-line="261" selection-end-column="23" />
+        <state relative-caret-position="-1428">
+          <caret line="63" selection-start-line="63" selection-end-line="65" selection-end-column="15" />
           <folding>
+            <element signature="e#4537#6180#0" />
             <element signature="e#6612#6698#0" />
             <element signature="e#6727#6948#0" />
             <element signature="e#6985#7148#0" />
@@ -610,43 +690,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/javascripts/3D_S.js">
+    <entry file="file://$PROJECT_DIR$/src/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="520" selection-start-line="520" selection-end-line="575" selection-end-column="1" />
-          <folding>
-            <element signature="e#1048#2579#0" />
-            <element signature="e#3639#4432#0" />
-            <element signature="e#6135#8587#0" />
-            <element signature="e#8719#9174#0" />
-            <element signature="e#9277#9766#0" />
-            <element signature="e#11113#11256#0" />
-            <element signature="e#11286#11964#0" />
-            <element signature="e#11994#13031#0" />
-            <element signature="e#13061#13978#0" />
-            <element signature="e#14067#17684#0" />
-            <element signature="e#17770#17856#0" />
-            <element signature="e#17890#17898#0" />
-            <element signature="e#17467#17522#0" />
-            <element signature="e#17543#18250#0" />
-            <element signature="e#18692#18700#0" />
-          </folding>
+        <state relative-caret-position="234">
+          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/3D_S.html">
+    <entry file="file://$PROJECT_DIR$/front/testData/f117.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1036">
-          <caret line="37" lean-forward="true" selection-end-line="39" selection-end-column="7" />
+        <state relative-caret-position="196">
+          <caret line="183" column="4" selection-start-line="183" selection-start-column="4" selection-end-line="184" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front/createFile_test.html">
+    <entry file="file://$PROJECT_DIR$/front/javascripts/3D_S_Final.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="224">
+          <caret line="191" column="39" lean-forward="true" selection-start-line="191" selection-start-column="39" selection-end-line="191" selection-end-column="39" />
           <folding>
-            <element signature="e#498#1631#0" />
+            <element signature="e#1278#2809#0" />
+            <element signature="e#2894#3818#0" />
+            <element signature="e#3935#4667#0" />
+            <element signature="e#5043#5051#0" />
+            <element signature="e#9067#9522#0" />
+            <element signature="e#11047#11190#0" />
+            <element signature="e#11221#11898#0" />
+            <element signature="e#11929#12966#0" />
+            <element signature="e#12997#13914#0" />
+            <element signature="e#14003#17619#0" />
+            <element signature="e#17705#17791#0" />
+            <element signature="e#15606#15931#0" />
+            <element signature="e#15957#16399#0" />
           </folding>
         </state>
       </provider>

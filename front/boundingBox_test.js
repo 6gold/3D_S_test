@@ -26,7 +26,7 @@ var callbackOnLoadSTL_3D_S = function (modelgeom) {
     drawModel_S(modelgeom);
     drawBoundingBox_S();
 };
-stlloader_3D_S.load('http://localhost:3000/../models/test.stl',callbackOnLoadSTL_3D_S);
+stlloader_3D_S.load('http://localhost:3000/../models/f117.stl',callbackOnLoadSTL_3D_S);
 
 render_3D_S();
 
@@ -40,10 +40,6 @@ function initWebGL_S() {
 
     // set scene
     scene_3D_S = new THREE.Scene();
-
-    // set Axis
-    axisHelper_3D_S = new THREE.AxisHelper( 5 );
-    scene_3D_S.add( axisHelper_3D_S );
 
     // set camera
     camera_3D_S = new THREE.PerspectiveCamera(
@@ -90,12 +86,12 @@ function render_3D_S() {
 
     // update values
     // console.log(camera_3D_S.rotation.x);
-    document.getElementById("center_X_3D_S").innerHTML = Math.ceil(camera_3D_S.position.x).toString();
-    document.getElementById("center_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.position.y).toString();
-    document.getElementById("center_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.position.z).toString();
-    document.getElementById("rotation_X_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.x).toString();
-    document.getElementById("rotation_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.y).toString();
-    document.getElementById("rotation_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.z).toString();
+    // document.getElementById("center_X_3D_S").innerHTML = Math.ceil(camera_3D_S.position.x).toString();
+    // document.getElementById("center_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.position.y).toString();
+    // document.getElementById("center_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.position.z).toString();
+    // document.getElementById("rotation_X_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.x).toString();
+    // document.getElementById("rotation_Y_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.y).toString();
+    // document.getElementById("rotation_Z_3D_S").innerHTML = Math.ceil(camera_3D_S.rotation.z).toString();
 
     controller_3D_S.update();
     renderer_3D_S.render(scene_3D_S,camera_3D_S);
@@ -124,9 +120,19 @@ function drawModel_S(modelgeom) {
 
     // object3D_S.position.set( 0, - 0.25, 0.6 );
     object3D_S.rotation.set( - Math.PI / 2, 0, 0 );
-    // object3D_S.scale.set( 20, 20, 20);
+    // object3D_S.scale.set( 0.2, 0.2, 0.2);
     // add mesh to the scene
     scene_3D_S.add(object3D_S);
+
+    // set Axis
+    var sqrt_3D_S = Math.sqrt(
+        (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) * (boundingBox_3D_S.max.x - boundingBox_3D_S.min.x) +
+        (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) * (boundingBox_3D_S.max.y - boundingBox_3D_S.min.y) +
+        (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z) * (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z)
+    );
+    var axis_radius_3D_S = Math.ceil(sqrt_3D_S) / 2;
+    axisHelper_3D_S = new THREE.AxisHelper( 2 * axis_radius_3D_S );
+    // scene_3D_S.add( axisHelper_3D_S );
 }
 
 /* method: drawBoundingBox
@@ -196,8 +202,7 @@ function drawBoundingBox_S() {
         (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z) * (boundingBox_3D_S.max.z - boundingBox_3D_S.min.z)
     );
     sphere_radius_3D_S = Math.ceil(sqrt_3D_S) / 2;
-    sphere_pos_3D_S = new THREE.Vector3(v8.x, v8.y, v8.z);
-    var sphgeom_3D_S = new THREE.SphereGeometry(sphere_radius_3D_S, 30, 8);
+    var sphgeom_3D_S = new THREE.SphereGeometry(1.1 * sphere_radius_3D_S, 30, 30);
     var sphmat_3D_S = new THREE.MeshBasicMaterial(
         {
             transparency: true,
@@ -210,6 +215,8 @@ function drawBoundingBox_S() {
     sphere_3D_S = new THREE.Mesh(sphgeom_3D_S, sphmat_3D_S);
     // sphere_3D_S.position.set(0, 0, 0);
     sphere_3D_S.position.set(v8.x, v8.y, v8.z);
+    console.log(v8);
+    console.log(sphere_3D_S.position);
     sphere_3D_S.rotation.set( - Math.PI / 2, 0, 0 );
     // add sphere to the scene
     scene_3D_S.add(sphere_3D_S);

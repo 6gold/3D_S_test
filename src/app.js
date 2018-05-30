@@ -30,15 +30,9 @@ app.use('/', index);
 app.use('/users', users);
 
 //+
-app.use('/current', function(req, res) {
-	res.send(currentData);
-});
-app.use('/rcs', function(req, res) {
-	res.send(rcsData);
-});
 //+s
-app.use('/rcs1', function(req, res) {
-    res.send(rcsData1);
+app.use('/rcs_S', function(req, res) {
+    res.send(rcsData_S);
 });
 
 // catch 404 and forward to error handler
@@ -65,13 +59,7 @@ module.exports = app;
 //+add file
 const fs = require('fs');
 
-const currentPath = './public/data/current.sc';
-const currentData = Buffer.from(fs.readFileSync(currentPath)).toString();
-
-//rsc_m
-const rcsPath = './public/data/test.rcs';
-const rcsData = Buffer.from(fs.readFileSync(rcsPath)).toString();
-
+//+
 //rsc_s
-const rcsPath1 = './public/data/test1.rcs';
-const rcsData1 = Buffer.from(fs.readFileSync(rcsPath1)).toString();
+const rcsPath_S = './public/data/f117.txt';
+const rcsData_S = Buffer.from(fs.readFileSync(rcsPath_S)).toString();

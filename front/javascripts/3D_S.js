@@ -42,7 +42,7 @@ var callbackOnLoadSTL_3D_S = function (modelgeom) {
     drawSphere();
     // drawBoundingBox_S(); // [test] draw AABB boundingBox
 };
-stlloader_3D_S.load('http://localhost:3000/../models/test.stl',callbackOnLoadSTL_3D_S);
+stlloader_3D_S.load('http://localhost:3000/../models/f117.stl',callbackOnLoadSTL_3D_S);
 
 // initialize GUI
 // initControls();

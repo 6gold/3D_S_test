@@ -184,6 +184,7 @@ function createSphere() {
         vertexColors: THREE.VertexColors,//以顶点颜色为准
         //vertexColors: geometry.colors,//以顶点颜色为准
         side: THREE.DoubleSide,//两面可见
+        transparent: true,
         opacity: 1.0
     });//材质对象
 
